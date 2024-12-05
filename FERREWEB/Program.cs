@@ -1,4 +1,4 @@
-using CREAR_API.Data;
+using FERREWEB.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

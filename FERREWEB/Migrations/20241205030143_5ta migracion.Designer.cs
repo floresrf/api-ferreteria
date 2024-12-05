@@ -3,6 +3,7 @@ using FERREWEB.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FERREWEB.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241205030143_5ta migracion")]
+    partial class _5tamigracion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,9 +41,6 @@ namespace FERREWEB.Migrations
                     b.HasKey("idCarro");
 
                     b.HasIndex("idProducto");
-
-                    b.HasIndex("idUsuario")
-                        .IsUnique();
 
                     b.ToTable("Carros");
                 });
@@ -176,15 +176,15 @@ namespace FERREWEB.Migrations
 
             modelBuilder.Entity("FERREWEB.Data.Models.Carro", b =>
                 {
-                    b.HasOne("FERREWEB.Data.Models.Producto", "ProductoRef")
-                        .WithMany()
-                        .HasForeignKey("idProducto")
+                    b.HasOne("FERREWEB.Data.Models.Usuario", "UsuarioRef")
+                        .WithOne("CarroRef")
+                        .HasForeignKey("FERREWEB.Data.Models.Carro", "idCarro")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FERREWEB.Data.Models.Usuario", "UsuarioRef")
-                        .WithOne("CarroRef")
-                        .HasForeignKey("FERREWEB.Data.Models.Carro", "idUsuario")
+                    b.HasOne("FERREWEB.Data.Models.Producto", "ProductoRef")
+                        .WithMany()
+                        .HasForeignKey("idProducto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

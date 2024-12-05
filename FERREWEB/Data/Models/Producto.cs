@@ -6,9 +6,9 @@ namespace FERREWEB.Data.Models
     {
         public int idProducto { get; set; }
         public string NombreProducto { get ; set; }
-        public string Costo { get; set; }
+        public int Costo { get; set; }
         public string Imagen { get; set; }
-        public string Stock { get; set; }
+        public int Stock { get; set; }
 
         //Relaciones
         public int idCategoria { get; set; }

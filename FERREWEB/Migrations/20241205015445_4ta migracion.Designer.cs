@@ -3,6 +3,7 @@ using FERREWEB.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FERREWEB.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241205015445_4ta migracion")]
+    partial class _4tamigracion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,30 +23,6 @@ namespace FERREWEB.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("FERREWEB.Data.Models.Carro", b =>
-                {
-                    b.Property<int>("idCarro")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idCarro"));
-
-                    b.Property<int>("idProducto")
-                        .HasColumnType("int");
-
-                    b.Property<int>("idUsuario")
-                        .HasColumnType("int");
-
-                    b.HasKey("idCarro");
-
-                    b.HasIndex("idProducto");
-
-                    b.HasIndex("idUsuario")
-                        .IsUnique();
-
-                    b.ToTable("Carros");
-                });
 
             modelBuilder.Entity("FERREWEB.Data.Models.Categoria", b =>
                 {
@@ -150,49 +129,6 @@ namespace FERREWEB.Migrations
                     b.ToTable("Productos");
                 });
 
-            modelBuilder.Entity("FERREWEB.Data.Models.Usuario", b =>
-                {
-                    b.Property<int>("idUsuario")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idUsuario"));
-
-                    b.Property<string>("Correo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreUsuario")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("idCarro")
-                        .HasColumnType("int");
-
-                    b.HasKey("idUsuario");
-
-                    b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("FERREWEB.Data.Models.Carro", b =>
-                {
-                    b.HasOne("FERREWEB.Data.Models.Producto", "ProductoRef")
-                        .WithMany()
-                        .HasForeignKey("idProducto")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FERREWEB.Data.Models.Usuario", "UsuarioRef")
-                        .WithOne("CarroRef")
-                        .HasForeignKey("FERREWEB.Data.Models.Carro", "idUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProductoRef");
-
-                    b.Navigation("UsuarioRef");
-                });
-
             modelBuilder.Entity("FERREWEB.Data.Models.Producto", b =>
                 {
                     b.HasOne("FERREWEB.Data.Models.Categoria", "CategoriaRef")
@@ -220,12 +156,6 @@ namespace FERREWEB.Migrations
             modelBuilder.Entity("FERREWEB.Data.Models.Marca", b =>
                 {
                     b.Navigation("ProductoRef");
-                });
-
-            modelBuilder.Entity("FERREWEB.Data.Models.Usuario", b =>
-                {
-                    b.Navigation("CarroRef")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

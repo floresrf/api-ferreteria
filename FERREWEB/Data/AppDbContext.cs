@@ -1,7 +1,7 @@
 ﻿using FERREWEB.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CREAR_API.Data
+namespace FERREWEB.Data
 {
     public class AppDbContext : DbContext
     {
@@ -12,7 +12,9 @@ namespace CREAR_API.Data
 
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
-        public DbSet<Marca> Marcas { get; set; }
+        public DbSet<Marca> Marcas { get; set; }        
+        public DbSet<Carro> Carros { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -49,6 +51,35 @@ namespace CREAR_API.Data
 
                 tb.HasOne(col => col.MarcaRef).WithMany(m => m.ProductoRef)
                 .HasForeignKey(col => col.idMarca);
+            });
+
+            modelBuilder.Entity<Carro>(tb =>
+            {
+                tb.HasKey(col => col.idCarro);
+
+                tb.Property(col => col.idCarro)
+                  .UseIdentityColumn()
+                  .ValueGeneratedOnAdd();
+
+                // Relación uno-a-uno: Carro -> Usuario
+                tb.HasOne(col => col.UsuarioRef)
+                  .WithOne(p => p.CarroRef)
+                  .HasForeignKey<Carro>(col => col.idUsuario); // Clave foránea en Carro
+
+                // Relación uno-a-uno: Carro -> Producto
+                tb.HasOne(col => col.ProductoRef)
+                  .WithMany()
+                  .HasForeignKey(col => col.idProducto);
+            });
+
+            modelBuilder.Entity<Usuario>(tb =>
+            {
+                tb.HasKey(col => col.idUsuario);
+
+                tb.Property(col => col.idUsuario).UseIdentityColumn().ValueGeneratedOnAdd();
+
+                tb.HasOne(col => col.CarroRef).WithOne(p => p.UsuarioRef)
+                .HasForeignKey<Carro>(col => col.idUsuario);
             });
         }
     }

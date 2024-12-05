@@ -7,7 +7,7 @@
 namespace FERREWEB.Migrations
 {
     /// <inheritdoc />
-    public partial class _4taMigracion : Migration
+    public partial class _4tamigracion : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,9 +45,9 @@ namespace FERREWEB.Migrations
                     idProducto = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NombreProducto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Costo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Costo = table.Column<int>(type: "int", nullable: false),
                     Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Stock = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false),
                     idCategoria = table.Column<int>(type: "int", nullable: false),
                     idMarca = table.Column<int>(type: "int", nullable: false)
                 },
