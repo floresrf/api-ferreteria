@@ -29,8 +29,8 @@ namespace FERREWEB
             services.AddTransient<MarcaService>();
             services.AddTransient<CategoriaService>();
             //services.AddTransient<ProductoService>();
-            //services.AddTransient<CarroService>();
-            //services.AddTransient<UsuarioService>();
+            services.AddTransient<CarroService>();
+            services.AddTransient<UsuarioService>();
 
             services.AddSwaggerGen(c =>
             {

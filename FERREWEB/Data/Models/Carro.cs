@@ -2,7 +2,7 @@
 {
     public class Carro
     {
-        public int idCarro { get; set; }
+        public int idCarro { get; set; }        
 
         //Relaciones
         public int idUsuario { get; set; }
