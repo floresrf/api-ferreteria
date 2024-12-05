@@ -9,21 +9,21 @@ namespace FERREWEB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MarcaController : ControllerBase
+    public class CategoriaController : ControllerBase
     {       
-        private readonly MarcaService _marcaService;
-        public MarcaController(MarcaService marcaService)
+        private readonly CategoriaService _categoriaService;
+        public CategoriaController(CategoriaService categoriaService)
         {
-            _marcaService = marcaService;
+            _categoriaService = categoriaService;
         }
 
-        [HttpPost("add-marca")]
-        public IActionResult AddMarca([FromBody] MarcaVM marca)
+        [HttpPost("add-categoria")]
+        public IActionResult AddCategoria([FromBody] CategoriaVM marca)
         {
             try
             {
-                var newMarca = _marcaService.AddMarca(marca);
-                return Created(nameof(AddMarca), newMarca);
+                var newCategoria = _categoriaService.AddCategoria(marca);
+                return Created(nameof(AddCategoria), newCategoria);
             }
             catch (NameException ex)
             {
@@ -35,10 +35,10 @@ namespace FERREWEB.Controllers
             }
         }
 
-        [HttpGet("get-marca-by-id/{id}")]
+        [HttpGet("get-categoria-by-id/{id}")]
         public IActionResult GetPublisherById(int id)
         {
-            var _response = _marcaService.GetMarcaByID(id);
+            var _response = _categoriaService.GetCategoriaByID(id);
             if (_response != null)
             {
                 return Ok(_response);
@@ -49,12 +49,12 @@ namespace FERREWEB.Controllers
             }
         }
 
-        [HttpDelete("delete-marca-by-id/{id}")]
+        [HttpDelete("delete-categoria-by-id/{id}")]
         public IActionResult DeleteMarcaById(int id)
         {
             try
             {
-                _marcaService.DeleteMarcaById(id);
+                _categoriaService.DeleteCategoriaById(id);
                 return Ok();
             }
             catch (Exception ex)

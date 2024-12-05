@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FERREWEB.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241205021204_3ra migracion")]
-    partial class _3ramigracion
+    [Migration("20241205164311_1ra migracion")]
+    partial class _1ramigracion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,30 @@ namespace FERREWEB.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("FERREWEB.Data.Models.Carro", b =>
+                {
+                    b.Property<int>("idCarro")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idCarro"));
+
+                    b.Property<int>("idProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idUsuario")
+                        .HasColumnType("int");
+
+                    b.HasKey("idCarro");
+
+                    b.HasIndex("idProducto");
+
+                    b.HasIndex("idUsuario")
+                        .IsUnique();
+
+                    b.ToTable("Carros");
+                });
 
             modelBuilder.Entity("FERREWEB.Data.Models.Categoria", b =>
                 {
@@ -129,6 +153,49 @@ namespace FERREWEB.Migrations
                     b.ToTable("Productos");
                 });
 
+            modelBuilder.Entity("FERREWEB.Data.Models.Usuario", b =>
+                {
+                    b.Property<int>("idUsuario")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idUsuario"));
+
+                    b.Property<string>("Correo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NombreUsuario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("idCarro")
+                        .HasColumnType("int");
+
+                    b.HasKey("idUsuario");
+
+                    b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("FERREWEB.Data.Models.Carro", b =>
+                {
+                    b.HasOne("FERREWEB.Data.Models.Producto", "ProductoRef")
+                        .WithMany()
+                        .HasForeignKey("idProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FERREWEB.Data.Models.Usuario", "UsuarioRef")
+                        .WithOne("CarroRef")
+                        .HasForeignKey("FERREWEB.Data.Models.Carro", "idUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductoRef");
+
+                    b.Navigation("UsuarioRef");
+                });
+
             modelBuilder.Entity("FERREWEB.Data.Models.Producto", b =>
                 {
                     b.HasOne("FERREWEB.Data.Models.Categoria", "CategoriaRef")
@@ -156,6 +223,12 @@ namespace FERREWEB.Migrations
             modelBuilder.Entity("FERREWEB.Data.Models.Marca", b =>
                 {
                     b.Navigation("ProductoRef");
+                });
+
+            modelBuilder.Entity("FERREWEB.Data.Models.Usuario", b =>
+                {
+                    b.Navigation("CarroRef")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

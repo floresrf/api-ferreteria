@@ -1,4 +1,4 @@
-﻿using CREAR_API.Exceptions;
+﻿using FERREWEB.Exceptions;
 using FERREWEB.Data;
 using FERREWEB.Data.Models;
 using FERREWEB.Data.ViewModels;
@@ -24,7 +24,7 @@ namespace FERREWEB.Data.Services
         public Marca AddMarca(MarcaVM marca)
         {
             if(StringStartsWithNumber(marca.NombreMarca)) 
-                throw new MarcaNameException("El nombre empieza con un número",
+                throw new NameException("El nombre empieza con un número",
                 marca.NombreMarca);
 
             var _marca = new Marca()
@@ -59,7 +59,7 @@ namespace FERREWEB.Data.Services
         internal void DeleteMarcaById(int id)
         {
             var _marca = _context.Marcas.FirstOrDefault(n => n.idMarca == id);
-            if(_marca == null)
+            if(_marca != null)
             {
                 _context.Marcas.Remove(_marca);
                 _context.SaveChanges();
