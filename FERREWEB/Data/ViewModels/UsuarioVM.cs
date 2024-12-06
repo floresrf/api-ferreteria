@@ -4,6 +4,7 @@
     {
         public string NombreUsuario { get; set; }
         public string Correo { get; set; }
+        public int idCarro { get; set; }
     }
 
     public class UsuarioCarroVM

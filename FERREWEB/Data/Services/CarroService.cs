@@ -1,6 +1,7 @@
 ﻿using FERREWEB.Data.Models;
 using FERREWEB.Data.ViewModels;
 using FERREWEB.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 
 namespace FERREWEB.Data.Services
@@ -15,9 +16,13 @@ namespace FERREWEB.Data.Services
         }
 
         //Metodo crear Carro
-        public Carro AddCarro()
+        public Carro AddCarro([FromBody]CarroVM carro)
         {
-            var _carro = new Carro();
+            var _carro = new Carro()
+            {
+                idProducto = carro.idProducto,
+                idUsuario = carro.idUsuario
+            };
             _context.Carros.Add(_carro);
             _context.SaveChanges();
 

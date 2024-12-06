@@ -6,6 +6,8 @@
         public int Costo { get; set; }
         public string Imagen { get; set; }
         public int Stock { get; set; }
+        public int idCategoria { get; set; }
+        public int idMarca { get; set; }
     }
 
     public class ProductoDataVM
@@ -14,8 +16,8 @@
         public int Costo { get; set; }
         public string Imagen { get; set; }
         public int Stock { get; set; }
-        public List<ProductowithCategoriaVM> Categoria { get; set; }
-        public List<ProductowithMarcaVM> Marca { get; set; }
+        public List<ProductowithCategoriaVM> idCategoria { get; set; }
+        public List<ProductowithMarcaVM> idMarca { get; set; }
     }
 
     public class ProductowithMarcaVM

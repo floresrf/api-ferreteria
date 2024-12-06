@@ -33,6 +33,20 @@ namespace FERREWEB.Controllers
             }
         }
 
+        [HttpGet("get-usuario-by-id/{id}")]
+        public IActionResult GetCarroById(int id)
+        {
+            var _response = _usuarioService.GetUsuarioById(id);
+            if (_response != null)
+            {
+                return Ok(_response);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         [HttpDelete("delete-usuario-by-id/{id}")]
         public IActionResult DeleteMarcaById(int id)
         {

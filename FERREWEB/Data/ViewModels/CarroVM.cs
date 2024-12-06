@@ -2,7 +2,6 @@
 {
     public class CarroVM
     {
-        public int idCarro { get; set; }
         public int idUsuario { get; set; }
         public int idProducto { get; set; }
     }

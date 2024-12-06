@@ -24,13 +24,17 @@ namespace FERREWEB.Data.Services
 
             var _usuario = new Usuario()
             {
-                NombreUsuario = usuario.NombreUsuario
+                NombreUsuario = usuario.NombreUsuario,
+                Correo = usuario.Correo,
+                idCarro = usuario.idCarro
             };
             _context.Usuarios.Add(_usuario);
             _context.SaveChanges();
 
             return _usuario;
         }
+
+        public Usuario GetUsuarioById(int id) => _context.Usuarios.FirstOrDefault(n => n.idCarro == id);
 
         internal void DeleteUsuarioById(int id)
         {

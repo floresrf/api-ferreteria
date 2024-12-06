@@ -18,11 +18,11 @@ namespace FERREWEB.Controllers
         }
 
         [HttpPost("add-carro")]
-        public IActionResult AddCarro()
+        public IActionResult AddCarro([FromBody] CarroVM carro)
         {            
             try
             {
-                var newCarro = _carroService.AddCarro();
+                var newCarro = _carroService.AddCarro(carro);
                 return Created(nameof(AddCarro), newCarro);
             }
             catch (Exception ex)

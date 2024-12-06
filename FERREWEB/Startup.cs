@@ -28,7 +28,7 @@ namespace FERREWEB
             //configurar el servicio para que pueda ser usado
             services.AddTransient<MarcaService>();
             services.AddTransient<CategoriaService>();
-            //services.AddTransient<ProductoService>();
+            services.AddTransient<ProductoService>();
             services.AddTransient<CarroService>();
             services.AddTransient<UsuarioService>();
 
